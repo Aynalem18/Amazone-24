@@ -7,7 +7,7 @@ export const CategoryInfos = [
     {
         title: "Discover Fashion Trends",
         name: "women's clothing",  
-        imgLink: "https://images-na.ssl-images-amazon.com/images/G/01/DiscoTec/2024/CategoryFlips/Holiday/Fashion/EN/WL1/FASHION_2523_BRS-2UP-TL-DT_AF_WL1_1500x1617_EN_V2.jpg",
+        imgLink:  "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg" ,
     },
     {
         title: "Men's Clothing",
