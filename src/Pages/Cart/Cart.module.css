@@ -8,6 +8,8 @@
     width: 100px !important;
 
 }
+
+
 .cart_product{
     display: flex;
     gap: 10px;
@@ -56,7 +58,7 @@ h3{
     background-color: rgb(242,241,241);
     border-radius: 5px;
 }
-.subtotal{
+.subtotal a{
     text-align: center;
     width: 100%;
     border: none;
