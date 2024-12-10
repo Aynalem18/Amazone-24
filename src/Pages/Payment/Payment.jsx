@@ -19,9 +19,11 @@ function Payment() {
    const totalItem = basket?.reduce((amount,item) =>{
         return item.amount  + amount;
     }, 0);
-    const total = basket?.reduce((amount,item) =>{
+    const total = basket.reduce((amount,item) =>{
         return item.price * item.amount + amount;
     }, 0);
+
+
 
     const [cardError , setCardError] = useState(null)
     const[processing, setProcessing] = useState(false)
@@ -44,13 +46,13 @@ function Payment() {
       // backend || function ----> contact to the client secret
         const response = await axiosInstance({
           method:"POST",
-          url:`/payment/create?total=${total*100}`,
+          url:`/payment/create?total=${total *100}`,
 
         });
-        // console.log(response.data);
+        console.log(response.data);
         const clientSecret = response.data?.clientSecret;
          // 2 . client side (react side confirmation)
-         const {paymentIntent} = await stripe.confirmCardPayment(clientSecret, { payment_method: { card: elements.getElement(CardElement),
+         const {paymentIntent} = await stripe.confirmCardPayment(clientSecret, {payment_method: {card:elements.getElement(CardElement),
 
           }
         });
@@ -58,12 +60,12 @@ function Payment() {
          // 3 .afer the confirmation --> order firestore  database save ,clear basket
          await db
          .collection("users")
-         .doc(user.uid)
+         .doc(user?.uid)
          .collection("orders")
-         .doc(paymentIntent.id).set({
+         .doc(paymentIntent?.id).set({
           basket:basket,
-          amount:paymentIntent.amount,
-          created :paymentIntent.created,
+          amount:paymentIntent?.amount,
+          created :paymentIntent?.created,
          });
         //  empty the basket
         dispatch({type:Type.EMPTY_BASKET});
@@ -78,13 +80,7 @@ function Payment() {
         
 
       }
-
-
-      
-
-     
-
-     
+ 
 
     }
 
@@ -131,8 +127,8 @@ function Payment() {
                 {/* price */}
                 <div className={classes.payment__price}>
                   <div>
-                    <span>
-                      Total Order | <CurrencyFormat amount={total}/>
+                    <span style={{display:"flex",gap:"10px"}}>
+                      <p>Total Order </p>| <CurrencyFormat amount={total}/>
                     </span>
                   </div>
                   <button type="submit">
@@ -165,3 +161,6 @@ function Payment() {
 }
 
 export default Payment
+
+
+
